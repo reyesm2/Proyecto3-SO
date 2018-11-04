@@ -11,7 +11,7 @@ import Modelo.Algoritmo;
  *
  * @author Rigo-PC
  */
-public class FIFO_TRACK implements Algoritmo{
+public class FIFO_TRACK extends Algoritmo{
 
     @Override
     public void ejecutar() {

@@ -11,7 +11,7 @@ import Modelo.Algoritmo;
  *
  * @author Rigo-PC
  */
-public class SCAN implements Algoritmo{
+public class SCAN extends Algoritmo{
 
     @Override
     public void ejecutar() {

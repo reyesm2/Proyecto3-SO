@@ -11,7 +11,7 @@ import Modelo.Algoritmo;
  *
  * @author Rigo-PC
  */
-public class PRI implements Algoritmo{
+public class PRI extends Algoritmo{
 
     @Override
     public void ejecutar() {

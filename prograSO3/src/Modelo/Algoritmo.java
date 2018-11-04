@@ -9,8 +9,8 @@ package Modelo;
  *
  * @author Rigo-PC
  */
-public interface Algoritmo {
+public abstract class Algoritmo {
     
-    public void ejecutar();
-    
+    public void ejecutar(){};
+
 }

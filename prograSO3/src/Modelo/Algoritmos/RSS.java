@@ -11,7 +11,7 @@ import Modelo.Algoritmo;
  *
  * @author Rigo-PC
  */
-public class RSS implements Algoritmo{
+public class RSS extends Algoritmo{
 
     @Override
     public void ejecutar() {

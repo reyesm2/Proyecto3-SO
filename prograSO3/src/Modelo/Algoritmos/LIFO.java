@@ -11,7 +11,7 @@ import Modelo.Algoritmo;
  *
  * @author Rigo-PC
  */
-public class LIFO implements Algoritmo{
+public class LIFO extends Algoritmo{
 
     @Override
     public void ejecutar() {

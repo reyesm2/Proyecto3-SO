@@ -11,7 +11,7 @@ import Modelo.Algoritmo;
  *
  * @author Rigo-PC
  */
-public class SSTF implements Algoritmo{
+public class SSTF extends Algoritmo{
 
     @Override
     public void ejecutar() {
