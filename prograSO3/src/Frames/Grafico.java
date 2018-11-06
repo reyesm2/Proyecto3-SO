@@ -7,11 +7,15 @@ package Frames;
 
 import java.util.ArrayList;
 import javax.swing.JPanel;
+
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+
+
 
 /**
  *
@@ -61,6 +65,8 @@ public class Grafico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void pintarGrafico(String nombre,ArrayList<ArrayList<Integer>> datos) {
+        
+        
         panel = new JPanel();
         getContentPane().add(panel);
         // Fuente de Datos
@@ -81,6 +87,7 @@ public class Grafico extends javax.swing.JFrame {
         // Mostrar Grafico
         ChartPanel chartPanel = new ChartPanel(chart);
         panel.add(chartPanel);
+
     }
     
 

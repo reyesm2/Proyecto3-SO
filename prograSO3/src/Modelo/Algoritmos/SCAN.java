@@ -7,6 +7,7 @@ package Modelo.Algoritmos;
 
 import Modelo.Algoritmo;
 import Modelo.Requisiciones;
+import Modelo.Solicitud;
 import java.util.ArrayList;
 
 /**
@@ -21,6 +22,50 @@ public class SCAN extends Algoritmo{
 
     @Override
     public void ejecutar(Requisiciones requesicion,int inicio,int total,int direccion,int cantidad){
+        
+        
+        ArrayList<Solicitud> listaSolicitudes = requesicion.getListaSolicitudes(); 
+        ArrayList<Integer> result = new ArrayList<>();
+        
+        
+        int cabezaDisco = inicio;
+        
+        Solicitud solicitudTemporal; 
+        while(cabezaDisco != total-1  || cabezaDisco != 0){
+            
+            solicitudTemporal = listaSolicitudes.get(cabezaDisco);
+            result.add(solicitudTemporal.getPista());
+            
+            if (direccion == 1){
+                cabezaDisco++;
+            }
+            else{
+                cabezaDisco--;
+            }
+            
+        }
+        
+        if(direccion == 1 ){
+            
+            while(cabezaDisco != 0 ){
+                
+                solicitudTemporal = listaSolicitudes.get(cabezaDisco);
+                result.add(solicitudTemporal.getPista());
+                cabezaDisco--;
+            }
+        }
+        else{
+            
+            while(cabezaDisco != total-1){
+                
+                solicitudTemporal = listaSolicitudes.get(cabezaDisco);
+                result.add(solicitudTemporal.getPista());
+                cabezaDisco++;
+                
+            }
+        }
+        
+        super.agregarResultado(result);
         
     }
     

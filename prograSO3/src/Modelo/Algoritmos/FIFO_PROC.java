@@ -21,6 +21,9 @@ public class FIFO_PROC extends Algoritmo{
     @Override
     public void ejecutar(Requisiciones requesicion,int inicio,int total,int direccion,int cantidad){
         
+        
+        
+        
     }
     
 }
