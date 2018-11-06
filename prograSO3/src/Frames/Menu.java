@@ -78,6 +78,9 @@ public class Menu extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jTextField_total1 = new javax.swing.JTextField();
         jButton_verGrafico = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea_estadistica = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -255,32 +258,45 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Ver estadistica");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jTextArea_estadistica.setColumns(20);
+        jTextArea_estadistica.setRows(5);
+        jScrollPane3.setViewportView(jTextArea_estadistica);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton_ejecutar)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextField_inicio)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextField_total, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(jLabel5)
+                    .addComponent(jComboBox_dir, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel6)
+                    .addComponent(jTextField_total1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextField_inicio)
-                            .addComponent(jLabel4)
-                            .addComponent(jTextField_total, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                            .addComponent(jLabel5)
-                            .addComponent(jComboBox_dir, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6)
-                            .addComponent(jTextField_total1))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 226, Short.MAX_VALUE)
-                        .addComponent(jButton_verGrafico)
-                        .addGap(84, 84, 84))))
+                    .addComponent(jButton_verGrafico)
+                    .addComponent(jButton1))
+                .addGap(84, 84, 84))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,19 +313,24 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField_total, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel5)
-                        .addGap(20, 20, 20)
-                        .addComponent(jComboBox_dir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_total1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField_total, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel5)
+                                .addGap(24, 24, 24)
+                                .addComponent(jComboBox_dir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField_total1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
@@ -440,9 +461,64 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton_verGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_verGraficoActionPerformed
         // TODO add your handling code here:
-        Grafico grafico = new Grafico("PRI",Singleton.getInstance().getControlador().getGestorAlgoritmos().get(1).getResultados());
-        grafico.show();
+        if(this.jCheckBox1.isSelected()){
+            Grafico grafico = new Grafico("RSS",Singleton.getInstance().getControlador()
+                    .getGestorAlgoritmos().get(0).getResultados());
+            grafico.show();
+        }
+        if(this.jCheckBox2.isSelected()){
+            Grafico grafico = new Grafico("PRI",Singleton.getInstance().getControlador()
+                    .getGestorAlgoritmos().get(1).getResultados());
+            grafico.show();
+        }
+        if(this.jCheckBox3.isSelected()){
+            Grafico grafico = new Grafico("FIFO",Singleton.getInstance().getControlador()
+                    .getGestorAlgoritmos().get(2).getResultados());
+            grafico.show();
+        }
+        if(this.jCheckBox4.isSelected()){
+            Grafico grafico = new Grafico("LIFO",Singleton.getInstance().getControlador()
+                    .getGestorAlgoritmos().get(3).getResultados());
+            grafico.show();
+        }
+        if(this.jCheckBox5.isSelected()){
+            Grafico grafico = new Grafico("FIFO",Singleton.getInstance().getControlador()
+                    .getGestorAlgoritmos().get(4).getResultados());
+            grafico.show();
+        }
+        if(this.jCheckBox6.isSelected()){
+            Grafico grafico = new Grafico("SSTF",Singleton.getInstance().getControlador()
+                    .getGestorAlgoritmos().get(5).getResultados());
+            grafico.show();
+        }
+        if(this.jCheckBox7.isSelected()){
+            Grafico grafico = new Grafico("SCAN",Singleton.getInstance().getControlador()
+                    .getGestorAlgoritmos().get(6).getResultados());
+            grafico.show();
+        }
+        if(this.jCheckBox8.isSelected()){
+            Grafico grafico = new Grafico("-SCAN",Singleton.getInstance().getControlador()
+                    .getGestorAlgoritmos().get(7).getResultados());
+            grafico.show();
+        }
+        if(this.jCheckBox9.isSelected()){
+            Grafico grafico = new Grafico("N-step SCAN",Singleton.getInstance().getControlador()
+                    .getGestorAlgoritmos().get(8).getResultados());
+            grafico.show();
+        }
+        if(this.jCheckBox10.isSelected()){
+            Grafico grafico = new Grafico("FSCAN",Singleton.getInstance().getControlador()
+                    .getGestorAlgoritmos().get(9).getResultados());
+            grafico.show();
+        }
+        
     }//GEN-LAST:event_jButton_verGraficoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String est = Singleton.getInstance().getControlador().verEstadisticas();
+        this.jTextArea_estadistica.setText(est);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void agregarAlgoritmos(){
         Algoritmo algoritmo = new RSS("RSS");
@@ -520,6 +596,7 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton_cargaProcesos;
     private javax.swing.JButton jButton_cargarRequesiciones;
     private javax.swing.JButton jButton_ejecutar;
@@ -546,8 +623,10 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea_estadistica;
     private javax.swing.JTextArea jTextArea_procesos;
     private javax.swing.JTextField jTextField_inicio;
     private javax.swing.JTextField jTextField_total;

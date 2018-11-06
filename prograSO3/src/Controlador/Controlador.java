@@ -29,6 +29,8 @@ public class Controlador {
     private ColaProcesos listaProcesos;
     private ArrayList<Requisiciones> listaRequesiciones;
     private ArrayList<Algoritmo> gestorAlgoritmos;
+    private int inicial =-1;
+    
 
     public Controlador() {
         listaProcesos = new ColaProcesos(1000);
@@ -191,6 +193,7 @@ public class Controlador {
      * @param cantidad 
      */
     public void ejecutarAlgoritmos(int requisicion,int inicio,int total,int direccion,int cantidad){
+        this.inicial = inicio;
         for(Algoritmo algoritmo : this.gestorAlgoritmos){
             if(algoritmo.isActivado()){
                algoritmo.ejecutar(this.listaRequesiciones.get(requisicion),inicio,total,direccion,cantidad);
@@ -237,4 +240,72 @@ public class Controlador {
         return cont;
     }
     
+    public int valorAbsoluto (int numero) {
+      return numero > 0 ? numero : -numero;
+    }
+    
+    /***
+     * calcula las pistas recorridas
+     * @param algoritmo
+     * @return 
+     */
+    public ArrayList<Integer> calcularEstadisticaAlgoritmo(Algoritmo algoritmo){
+        ArrayList<ArrayList<Integer>> resultados = algoritmo.getResultados();
+        ArrayList<Integer> result = new ArrayList<>();
+        int anterior = this.inicial; 
+        int abs = 0;
+        for(ArrayList<Integer> resultado : resultados){
+            for(Integer valor : resultado){
+                abs = valorAbsoluto(anterior-valor);
+                result.add(abs);
+            }
+        }
+        return result;
+    }
+    
+    /**
+     * Calcula el promedio de los resultados
+     * @param valores
+     * @return 
+     */
+    public int promedioEstadistica(ArrayList<Integer> valores){
+        int suma=0;
+        for(Integer valor : valores){
+            suma+=valor;
+        }
+        return suma/valores.size();
+    }
+    
+    /**
+     * Metodo que escribe las estadisticas
+     * @param algoritmo
+     * @return 
+     */
+    public String verEstadisticaAlgoritmo(Algoritmo algoritmo){
+        ArrayList<ArrayList<Integer>> resultados = algoritmo.getResultados();
+        ArrayList<Integer> valores = calcularEstadisticaAlgoritmo(algoritmo);
+        String result = algoritmo.getNombre()+"\n"+
+                "Siguiente\t\tNúmero\n";
+        int cont=0;
+        for(ArrayList<Integer> resultado : resultados){
+            for(Integer valor : resultado){
+                result+=String.valueOf(valor)+"\t\t "+String.valueOf(valores.get(cont))+"\n";
+                cont++;
+            }
+        }
+        int promedio = promedioEstadistica(valores);
+        result+="Promedio:\t\t"+String.valueOf(promedio);
+        System.out.println(result);
+        return result;
+    }
+    
+    public String verEstadisticas(){
+        String result="";
+        for(Algoritmo algoritmo : this.gestorAlgoritmos){
+            if(algoritmo.isActivado()){
+                result = verEstadisticaAlgoritmo(algoritmo);
+            }
+        }
+        return result;
+    }
 }
