@@ -92,26 +92,31 @@ public class ColaProcesos {
         
     }
     
-    public void ImprimirColaProcesos(){
-
+    public String ImprimirColaProcesos(){
+        String result="";
         for (Proceso proceso : this.listaProcesos) {
-            proceso.ImprimirProceso();
+            result += proceso.ImprimirProceso()+"\n";
         }
-
+        return result;
     }
 
        public void AgregarProceso(Proceso proceso){
         this.listaProcesos.add(proceso);
     }
-
-    public void cambiarPC(int proceso,boolean cambio){
-        for(int i=0;i<this.listaProcesos.size();i++){
-            Proceso proc = this.listaProcesos.get(i);
-            if(proc.getIdentificador()==proceso){
-                proc.setUso(cambio);
-                this.listaProcesos.set(i, proc);
-            }
+    
+    public ArrayList<Integer> getPrioridades(){
+        ArrayList<Integer> result=new ArrayList<>();
+        for(Proceso proceso : this.listaProcesos){
+            result.add(proceso.getPrioridad());
         }
+        return result;
     }
     
+    public ArrayList<String> geNombreProcesos(){
+        ArrayList<String> result=new ArrayList<>();
+        for(Proceso proceso : this.listaProcesos){
+            result.add(proceso.getNombre());
+        }
+        return result;
+    }
 }

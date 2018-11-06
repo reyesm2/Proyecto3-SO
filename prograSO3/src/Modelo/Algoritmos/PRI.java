@@ -5,7 +5,11 @@
  */
 package Modelo.Algoritmos;
 
+import Controlador.Singleton;
 import Modelo.Algoritmo;
+import Modelo.Requisiciones;
+import Modelo.Solicitud;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,9 +17,23 @@ import Modelo.Algoritmo;
  */
 public class PRI extends Algoritmo{
 
+    public PRI(String nombre) {
+        super(nombre);
+    }
+    
     @Override
-    public void ejecutar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void ejecutar(Requisiciones requisicion,int inicio,int total,int direccion,int cantidad){
+        ArrayList<String> lista = Singleton.getInstance().getControlador().ordenProcesosPrioridad();
+        ArrayList<Integer> result = new ArrayList<>();
+        
+        for(String proc : lista){
+            for(Solicitud solicitud : requisicion.getListaSolicitudes()){
+                if(proc.equals(solicitud.getProceso())){
+                    result.add(solicitud.getPista());
+                }
+            }
+        }
+        super.agregarResultado(result);
     }
     
 }

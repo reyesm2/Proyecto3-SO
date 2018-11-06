@@ -13,20 +13,19 @@ public class Proceso {
     
     
     private int identificador;
-    private String estado;
-    private int prioridad;
-    private int ProgramCounter;
     private String nombre;
-    private boolean uso;
-    
-    public Proceso(int identificador,String estado, int prioridad, String nombre) {
-        
+    private int prioridad;
+    private String usuario;
+    private String estado;
+
+    public Proceso(int identificador, String nombre, int prioridad, String usuario) {
         this.identificador = identificador;
+        this.nombre = nombre;
         this.prioridad = prioridad;
-        this.uso=false;
-        this.estado = estado;
-        this.nombre=nombre;
+        this.usuario = usuario;
+        this.estado="Running";
     }
+    
     
     
     public String getNombre(){
@@ -41,18 +40,9 @@ public class Proceso {
         this.estado = estado;
     }
     
-
-    public boolean isUso() {
-        return uso;
-    }
-
-    public void setUso(boolean uso) {
-        this.uso = uso;
-    } 
-    
-    public void ImprimirProceso(){
-        System.out.println("Proceso # " + this.identificador +
-        " Estado:  " + estado + " Prioridad: " + this.prioridad);
+    public String ImprimirProceso(){
+        return "Proceso: "+this.nombre
+                + " Prioridad: " + this.prioridad +" Usuario: "+this.usuario;
     }
     
     public int getIdentificador() {
@@ -72,22 +62,18 @@ public class Proceso {
         this.prioridad = prioridad;
     }
 
-    public int getProgramCounter() {
-        return ProgramCounter;
-    }
-
-    public void setProgramCounter(int ProgramCounter) {
-        this.ProgramCounter = ProgramCounter;
-    }    
-
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    @Override
-    public String toString() {
-        return "Proceso{" + "identificador=" + identificador + ", estado=" + estado + ", prioridad=" + prioridad + ", ProgramCounter=" + ProgramCounter + ", nombre=" + nombre + ", uso=" + uso + '}';
+    public String getUsuario() {
+        return usuario;
     }
-    
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+
+      
 }

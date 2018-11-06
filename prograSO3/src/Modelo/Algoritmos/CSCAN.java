@@ -10,5 +10,9 @@ package Modelo.Algoritmos;
  * @author Rigo-PC
  */
 public class CSCAN extends SCAN{
+
+    public CSCAN(String nombre) {
+        super(nombre);
+    }
     
 }

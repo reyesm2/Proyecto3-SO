@@ -10,5 +10,9 @@ package Modelo.Algoritmos;
  * @author Rigo-PC
  */
 public class FSCAN extends SCAN{
+
+    public FSCAN(String nombre) {
+        super(nombre);
+    }
     
 }

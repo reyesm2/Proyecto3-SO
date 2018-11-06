@@ -5,6 +5,8 @@
  */
 package prograso3;
 
+import Frames.Menu;
+
 /**
  *
  * @author Rigo-PC
@@ -16,6 +18,8 @@ public class PrograSO3 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Menu menu = new Menu();
+        menu.show();
     }
     
 }

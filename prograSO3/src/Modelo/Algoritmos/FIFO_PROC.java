@@ -6,6 +6,7 @@
 package Modelo.Algoritmos;
 
 import Modelo.Algoritmo;
+import Modelo.Requisiciones;
 
 /**
  *
@@ -13,9 +14,13 @@ import Modelo.Algoritmo;
  */
 public class FIFO_PROC extends Algoritmo{
 
+    public FIFO_PROC(String nombre) {
+        super(nombre);
+    }
+    
     @Override
-    public void ejecutar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void ejecutar(Requisiciones requesicion,int inicio,int total,int direccion,int cantidad){
+        
     }
     
 }

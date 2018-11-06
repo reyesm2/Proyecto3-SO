@@ -9,12 +9,12 @@ package Modelo;
  *
  * @author Rigo-PC
  */
-public class Solicitudes {
+public class Solicitud {
     
     private String proceso;
     private int pista;
 
-    public Solicitudes(String proceso, int pista) {
+    public Solicitud(String proceso, int pista) {
         this.proceso = proceso;
         this.pista = pista;
     }
@@ -34,6 +34,14 @@ public class Solicitudes {
     public void setPista(int pista) {
         this.pista = pista;
     }
+
+    public String imprimirSolicitud(){
+        return pista +", "+  proceso +"\n";
+    }
     
-    
+    @Override
+    public String toString() {
+        return pista +", "+  proceso +"\n";
+    }
+
 }
