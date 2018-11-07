@@ -268,10 +268,13 @@ public class Controlador {
      * @param valores
      * @return 
      */
-    public int promedioEstadistica(ArrayList<Integer> valores){
-        int suma=0;
+    public float promedioEstadistica(ArrayList<Integer> valores){
+        float suma=0;
         for(Integer valor : valores){
             suma+=valor;
+        }
+        if(suma==0){
+            return suma;
         }
         return suma/valores.size();
     }
@@ -293,18 +296,32 @@ public class Controlador {
                 cont++;
             }
         }
-        int promedio = promedioEstadistica(valores);
-        result+="Promedio:\t\t"+String.valueOf(promedio);
-        System.out.println(result);
+        float promedio = promedioEstadistica(valores);
+        result+="Promedio:\t\t"+String.valueOf(promedio)+"\n";
         return result;
     }
-    
+    /**
+     * Permite ver las estadisticas de los algoritmos selecionados
+     * @return 
+     */
     public String verEstadisticas(){
         String result="";
         for(Algoritmo algoritmo : this.gestorAlgoritmos){
-            if(algoritmo.isActivado()){
+            if(algoritmo.isActivado()&& algoritmo.getResultados().size()>0){
                 result = verEstadisticaAlgoritmo(algoritmo);
             }
+        }
+        return result;
+    }
+    /**
+     * Permite ver las estadistica de los selecionados
+     * @param select
+     * @return 
+     */
+    public String verComparacionesAlgoritmo(ArrayList<Integer> select){
+        String result = "";
+        for(Integer valor : select){
+            result += verEstadisticaAlgoritmo(this.gestorAlgoritmos.get(valor));
         }
         return result;
     }
