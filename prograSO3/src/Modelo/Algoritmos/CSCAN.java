@@ -33,7 +33,7 @@ public class CSCAN extends SCAN{
         
         if(direccion == 1 ){
             
-            while(cabezaDisco != total-1){
+            while(cabezaDisco  < listaSolicitudes.size() ){
                 solicitudTemporal = listaSolicitudes.get(cabezaDisco);
                 result.add(solicitudTemporal.getPista());
                 cabezaDisco++;
@@ -41,7 +41,7 @@ public class CSCAN extends SCAN{
             
             cabezaDisco = 0 ;
             
-            while(cabezaDisco != total-1){
+            while(cabezaDisco < listaSolicitudes.size() ){
                 solicitudTemporal = listaSolicitudes.get(cabezaDisco);
                 result.add(solicitudTemporal.getPista());
                 cabezaDisco++;
@@ -56,7 +56,7 @@ public class CSCAN extends SCAN{
                 cabezaDisco--;
             }
             
-            cabezaDisco = total-1;
+            cabezaDisco = listaSolicitudes.size();
             
             while(cabezaDisco != 0){
                 solicitudTemporal = listaSolicitudes.get(cabezaDisco);

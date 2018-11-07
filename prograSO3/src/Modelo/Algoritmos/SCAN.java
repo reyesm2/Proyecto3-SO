@@ -31,7 +31,7 @@ public class SCAN extends Algoritmo{
         int cabezaDisco = inicio;
         
         Solicitud solicitudTemporal; 
-        while(cabezaDisco != total-1  || cabezaDisco != 0){
+        while(cabezaDisco < listaSolicitudes.size()  || cabezaDisco != 0){
             
             solicitudTemporal = listaSolicitudes.get(cabezaDisco);
             result.add(solicitudTemporal.getPista());
@@ -56,7 +56,7 @@ public class SCAN extends Algoritmo{
         }
         else{
             
-            while(cabezaDisco != total-1){
+            while(cabezaDisco < listaSolicitudes.size() ){
                 
                 solicitudTemporal = listaSolicitudes.get(cabezaDisco);
                 result.add(solicitudTemporal.getPista());
