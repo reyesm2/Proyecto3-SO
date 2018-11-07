@@ -587,7 +587,22 @@ public class Menu extends javax.swing.JFrame {
         String inicio = this.jTextField_inicio.getText();
         String total = this.jTextField_total.getText();
         String grupos = this.jTextField_total1.getText();
-        int direccion = this.jComboBox_dir.getItemCount();
+        
+        
+        int direccion = 0 ;
+        String direccionString = (String)this.jComboBox_dir.getSelectedItem();
+        if(direccionString.equals("Incremento")){
+            direccion = 1; 
+            
+        }
+        else{
+            direccion = 0;
+        }
+
+        System.out.println("Direccion: " + direccion);
+        
+        
+        
         if(!inicio.equals("")){
             if(!total.equals("")){
                 if(!grupos.equals("")){

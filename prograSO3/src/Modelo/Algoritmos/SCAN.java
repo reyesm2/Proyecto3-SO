@@ -24,45 +24,67 @@ public class SCAN extends Algoritmo{
     public void ejecutar(Requisiciones requesicion,int inicio,int total,int direccion,int cantidad){
         
         
-        ArrayList<Solicitud> listaSolicitudes = requesicion.getListaSolicitudes(); 
+        ArrayList<Solicitud> listaSolicitudes = (ArrayList)requesicion.getListaSolicitudes().clone(); 
         ArrayList<Integer> result = new ArrayList<>();
         
         
         int cabezaDisco = inicio;
+        Solicitud solicitudTemporal;
         
-        Solicitud solicitudTemporal; 
-        while(cabezaDisco < listaSolicitudes.size()  || cabezaDisco != 0){
-            
-            solicitudTemporal = listaSolicitudes.get(cabezaDisco);
-            result.add(solicitudTemporal.getPista());
-            
-            if (direccion == 1){
-                cabezaDisco++;
-            }
-            else{
-                cabezaDisco--;
-            }
-            
-        }
-        
+        System.out.println("Lista de Solicitudes: " + listaSolicitudes);
         if(direccion == 1 ){
             
-            while(cabezaDisco != 0 ){
+            
+            while(cabezaDisco < listaSolicitudes.size()){
                 
                 solicitudTemporal = listaSolicitudes.get(cabezaDisco);
-                result.add(solicitudTemporal.getPista());
+                
+                if(solicitudTemporal != null){
+                    result.add(solicitudTemporal.getPista());
+                    listaSolicitudes.set(cabezaDisco, null);
+                }         
+                cabezaDisco++;
+                
+            }
+            
+            cabezaDisco = listaSolicitudes.size() -1;
+            while(cabezaDisco > -1 ){
+                
+                solicitudTemporal = listaSolicitudes.get(cabezaDisco);
+                
+                if(solicitudTemporal != null){
+                    result.add(solicitudTemporal.getPista());
+                    listaSolicitudes.set(cabezaDisco, null);
+                }
                 cabezaDisco--;
             }
+    
         }
         else{
             
-            while(cabezaDisco < listaSolicitudes.size() ){
+            while(cabezaDisco > 0 ){
                 
                 solicitudTemporal = listaSolicitudes.get(cabezaDisco);
-                result.add(solicitudTemporal.getPista());
-                cabezaDisco++;
                 
+                if(solicitudTemporal != null){
+                    result.add(solicitudTemporal.getPista());
+                    listaSolicitudes.set(cabezaDisco, null);
+                }
+                cabezaDisco--;
             }
+            
+            cabezaDisco = 0;
+            
+            while(cabezaDisco < listaSolicitudes.size()){
+                
+                solicitudTemporal = listaSolicitudes.get(cabezaDisco);
+                
+                if(solicitudTemporal != null){
+                    result.add(solicitudTemporal.getPista());
+                    listaSolicitudes.set(cabezaDisco,null);
+                }
+                cabezaDisco++;
+            }   
         }
         
         super.agregarResultado(result);
