@@ -5,8 +5,13 @@
  */
 package Modelo.Algoritmos;
 
+import Controlador.Singleton;
 import Modelo.Algoritmo;
+import Modelo.Proceso;
 import Modelo.Requisiciones;
+import Modelo.Solicitud;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -20,6 +25,20 @@ public class LIFO extends Algoritmo{
 
     @Override
     public void ejecutar(Requisiciones requesicion,int inicio,int total,int direccion,int cantidad){
+        ArrayList<Proceso> cola = Singleton.getInstance().getControlador().getListaProcesos().getListaProcesos();
+        ArrayList<Integer> result = new ArrayList<>();
+        
+        Collections.reverse(cola);
+        
+        System.out.println(cola.toString());
+        for(Proceso proc : cola){
+            for(Solicitud solicitud : requesicion.getListaSolicitudes()){
+                if(proc.getNombre().equals(solicitud.getProceso())){
+                    result.add(solicitud.getPista());
+                }
+            }
+        }
+        super.agregarResultado(result);
         
     }
     
