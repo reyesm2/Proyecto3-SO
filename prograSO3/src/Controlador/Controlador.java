@@ -325,4 +325,10 @@ public class Controlador {
         }
         return result;
     }
+    
+    public void eliminarResultados(){
+        for(Algoritmo algoritmo : this.gestorAlgoritmos){
+            algoritmo.eliminarResultados();
+        }
+    }
 }
