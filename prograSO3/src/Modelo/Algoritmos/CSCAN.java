@@ -27,40 +27,63 @@ public class CSCAN extends SCAN{
         
         int cabezaDisco = inicio; 
         
-        ArrayList<Solicitud> listaSolicitudes = requesicion.getListaSolicitudes();
+        ArrayList<Solicitud> listaSolicitudes = (ArrayList)requesicion.getListaSolicitudes().clone();
         Solicitud solicitudTemporal;
         ArrayList<Integer> result = new ArrayList<>();
         
         if(direccion == 1 ){
             
             while(cabezaDisco  < listaSolicitudes.size() ){
+                
                 solicitudTemporal = listaSolicitudes.get(cabezaDisco);
-                result.add(solicitudTemporal.getPista());
+                
+                if( solicitudTemporal != null){
+                    result.add(solicitudTemporal.getPista());
+                    listaSolicitudes.set(cabezaDisco, null);
+                    
+                }
+                
                 cabezaDisco++;
             }
             
             cabezaDisco = 0 ;
             
             while(cabezaDisco < listaSolicitudes.size() ){
+                
                 solicitudTemporal = listaSolicitudes.get(cabezaDisco);
-                result.add(solicitudTemporal.getPista());
+                if(solicitudTemporal != null){
+                    result.add(solicitudTemporal.getPista());
+                    listaSolicitudes.set(cabezaDisco, null);
+                }
+                
                 cabezaDisco++;
             }
             
         }
         else{
             
-            while(cabezaDisco != 0){
+            while(cabezaDisco > -1){
                 solicitudTemporal = listaSolicitudes.get(cabezaDisco);
-                result.add(solicitudTemporal.getPista());
+                
+                if(solicitudTemporal != null){
+                    result.add(solicitudTemporal.getPista());
+                    listaSolicitudes.set(cabezaDisco, null);
+                }
+                
                 cabezaDisco--;
             }
             
-            cabezaDisco = listaSolicitudes.size();
+            cabezaDisco = listaSolicitudes.size() -1 ;
             
-            while(cabezaDisco != 0){
+            while(cabezaDisco > -1 ){
+                
                 solicitudTemporal = listaSolicitudes.get(cabezaDisco);
-                result.add(solicitudTemporal.getPista());
+                
+                if(solicitudTemporal != null){
+                    result.add(solicitudTemporal.getPista());
+                    listaSolicitudes.set(cabezaDisco, null);
+                }
+                
                 cabezaDisco--;
             }
             
