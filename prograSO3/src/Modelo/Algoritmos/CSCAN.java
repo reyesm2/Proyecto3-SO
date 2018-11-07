@@ -20,7 +20,7 @@ public class CSCAN extends SCAN{
     }
     
     
-    
+    /// Listo
     @Override
     public void ejecutar(Requisiciones requesicion,int inicio,int total,int direccion,int cantidad){
         
