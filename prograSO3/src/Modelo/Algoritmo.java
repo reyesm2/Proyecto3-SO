@@ -53,5 +53,8 @@ public abstract class Algoritmo {
     }
     
     public void ejecutar(Requisiciones requisiciones,int inicio,int total,int direccion,int cantidad){};
-
+    
+    public void eliminarResultados(){
+        this.resultados = new ArrayList<>();
+    }
 }
