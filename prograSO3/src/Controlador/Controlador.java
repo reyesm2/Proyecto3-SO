@@ -308,7 +308,7 @@ public class Controlador {
         String result="";
         for(Algoritmo algoritmo : this.gestorAlgoritmos){
             if(algoritmo.isActivado()&& algoritmo.getResultados().size()>0){
-                result = verEstadisticaAlgoritmo(algoritmo);
+                result += verEstadisticaAlgoritmo(algoritmo);
             }
         }
         return result;
