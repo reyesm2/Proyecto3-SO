@@ -24,10 +24,10 @@ public class SCAN extends Algoritmo{
     public void ejecutar(Requisiciones requesicion,int inicio,int total,int direccion,int cantidad){
         
         
-        ArrayList<Solicitud> listaSolicitudes = (ArrayList)requesicion.getListaSolicitudes().clone(); 
+        ArrayList<Solicitud> listaSolicitudes = (ArrayList)requesicion.getListaSolicitudes().clone();
+        
+        
         ArrayList<Integer> result = new ArrayList<>();
-        
-        
         int cabezaDisco = inicio;
         Solicitud solicitudTemporal;
         
