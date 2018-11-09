@@ -192,15 +192,12 @@ public class SCAN extends Algoritmo{
             System.out.println("trackResultado: "  + trackResultado);
             
             listaSolicitudes.remove(posicionSiguiente);
-            result.add(trackResultado);
-            
-            
+            result.add(trackResultado); 
         }
-        
-        
-        
-        
+         
         super.agregarResultado(result);
+        
+        
         
     }
     
