@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 public class Controlador {
     
     private int cantidadProcesos = 0;  // Usado como identificador
+    private int cantidadRequisiciones = 0; //Usado como identifcado
     private ColaProcesos listaProcesos;
     private ArrayList<Requisiciones> listaRequesiciones;
     private ArrayList<Algoritmo> gestorAlgoritmos;
@@ -60,6 +61,14 @@ public class Controlador {
 
     public void setListaRequesiciones(ArrayList<Requisiciones> listaRequesiciones) {
         this.listaRequesiciones = listaRequesiciones;
+    }
+
+    public int getCantidadRequisiciones() {
+        return cantidadRequisiciones;
+    }
+
+    public void setCantidadRequisiciones(int cantidadRequisiciones) {
+        this.cantidadRequisiciones = cantidadRequisiciones;
     }
 
     public ArrayList<Algoritmo> getGestorAlgoritmos() {
@@ -157,8 +166,10 @@ public class Controlador {
                     Solicitud solictud = new Solicitud(proceso, pista);
                     requisicion.agregarSolicitud(solictud);
                 }
+                this.cantidadRequisiciones++;
                 this.listaRequesiciones.add(requisicion);
             }
+            System.out.println(this.cantidadRequisiciones);
             return true;
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
@@ -196,7 +207,20 @@ public class Controlador {
         this.inicial = inicio;
         for(Algoritmo algoritmo : this.gestorAlgoritmos){
             if(algoritmo.isActivado()){
-               algoritmo.ejecutar(this.listaRequesiciones.get(requisicion),inicio,total,direccion,cantidad);
+                
+                int anterior=0;
+                
+                if(algoritmo.getResultados().isEmpty()){
+                    anterior = this.inicial; 
+                    System.out.println("Inicial: "+anterior);
+                }else{
+                    int s1=algoritmo.getResultados().size()-1;
+                    int s2= algoritmo.getResultados().get(s1).size()-1;
+                    anterior = algoritmo.getResultados().get(s1).get(s2);
+                    System.out.println("Anterior:"+ anterior);
+                }
+                
+               algoritmo.ejecutar(this.listaRequesiciones.get(requisicion),anterior,total,direccion,cantidad);
                 System.out.println(algoritmo.getResultados().toString());
             }
         }
@@ -252,12 +276,13 @@ public class Controlador {
     public ArrayList<Integer> calcularEstadisticaAlgoritmo(Algoritmo algoritmo){
         ArrayList<ArrayList<Integer>> resultados = algoritmo.getResultados();
         ArrayList<Integer> result = new ArrayList<>();
-        int anterior = this.inicial; 
+        int anterior = this.inicial;     
         int abs = 0;
         for(ArrayList<Integer> resultado : resultados){
             for(Integer valor : resultado){
                 abs = valorAbsoluto(anterior-valor);
                 result.add(abs);
+                anterior = valor;
             }
         }
         return result;
