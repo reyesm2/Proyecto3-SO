@@ -22,14 +22,14 @@ public class NSCAN extends SCAN{
     
     
     
-    public ArrayList<Integer> SCAN(ArrayList<Solicitud> listaSolicitudes, int inicio,int total,int direccion,int cantidad){
+    public ArrayList<Integer> SCAN(List<Solicitud> listaSolicitudes, int inicio,int total,int direccion,int cantidad){
         
         
         ArrayList<Integer> result = new ArrayList<>();
         int cabezaDisco = inicio;
         Solicitud solicitudTemporal;
         
-        System.out.println("Lista de Solicitudes: " + listaSolicitudes);
+       // System.out.println("Lista de Solicitudes: " + listaSolicitudes);
         if(direccion == 1 ){
             
             
@@ -98,6 +98,7 @@ public class NSCAN extends SCAN{
         
         ArrayList<Solicitud> listaSolicitudes = (ArrayList)requesicion.getListaSolicitudes().clone();
         
+        System.out.println(listaSolicitudes);
         
         int cantidadGrupos  = listaSolicitudes.size() / cantidad;   
         int sobrante = listaSolicitudes.size() % cantidad;      
@@ -105,32 +106,35 @@ public class NSCAN extends SCAN{
             cantidadGrupos++;
         }
         
-        List<Solicitud> subLista;
+        List<Solicitud> subListaTemporal;
         ArrayList<List> listaGrupos = new ArrayList<>();
         int indiceInicial = 0;
         int indiceFinal = cantidad;
         
         for(int i = 0 ; i < cantidadGrupos; i++){
             
-            
-            
-            
             if(indiceFinal > listaSolicitudes.size()){
                 indiceFinal = listaSolicitudes.size()  ;
             }
-            
-            System.out.println("Indice Inicial: "  + indiceInicial + " Indice Final: " + indiceFinal);
-
-            
-            subLista = listaSolicitudes.subList(indiceInicial,indiceFinal);
-            listaGrupos.add(subLista);
+            subListaTemporal = listaSolicitudes.subList(indiceInicial,indiceFinal);
+            listaGrupos.add(subListaTemporal);
             indiceInicial += cantidad;
             indiceFinal += cantidad;
  
         }
 
         System.out.println("Lista de Grupos size: " + listaGrupos.size());
- 
+        
+        ArrayList<Integer> result = new ArrayList<>();
+        ArrayList<Integer> resultTemporal;
+        for(List subLista : listaGrupos){
+            
+            resultTemporal = this.SCAN(subLista, inicio, total, direccion, cantidad);
+            result.addAll(resultTemporal);
+            
+        }
+        
+        super.agregarResultado(result);
         
         
         
