@@ -7,6 +7,8 @@ package Modelo.Algoritmos;
 
 import Modelo.Algoritmo;
 import Modelo.Requisiciones;
+import Modelo.Solicitud;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,6 +22,12 @@ public class FIFO_TRACK extends Algoritmo{
 
     @Override
     public void ejecutar(Requisiciones requesicion,int inicio,int total,int direccion,int cantidad){
+        ArrayList<Integer> result = new ArrayList<>();
+        
+        for(Solicitud solicitud : requesicion.getListaSolicitudes()){
+            result.add(solicitud.getPista());
+        }
+        super.agregarResultado(result);
         
     }
     
