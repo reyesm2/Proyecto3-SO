@@ -9,6 +9,7 @@ import Modelo.Algoritmo;
 import Modelo.Requisiciones;
 import Modelo.Solicitud;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -23,7 +24,7 @@ public class SCAN extends Algoritmo{
     
     
    
-    public Integer masCercano(ArrayList<Solicitud> listaSolicitudes, int inicio, int direccion){
+    public Integer masCercano(List<Solicitud> listaSolicitudes, int inicio, int direccion){
         
        
         
@@ -59,14 +60,14 @@ public class SCAN extends Algoritmo{
             
         }
         
-        System.out.println("Lista de Restas1: " + listaRestas);
+       // System.out.println("Lista de Restas1: " + listaRestas);
         
         if(restaMejor != 1000){
             
-            System.out.println("Resta mejor: " + restaMejor);
+           // System.out.println("Resta mejor: " + restaMejor);
             
             int posicion = listaRestas.indexOf(restaMejor);
-            System.out.println("Posicion de la mejor resta: " + posicion);
+          //  System.out.println("Posicion de la mejor resta: " + posicion);
             return posicion;
             
         }
@@ -110,8 +111,8 @@ public class SCAN extends Algoritmo{
         }
         
         
-        System.out.println("Resta mejor: " + restaMejor);
-        System.out.println("Lista de Restas2: " + listaRestas);
+        //System.out.println("Resta mejor: " + restaMejor);
+        //System.out.println("Lista de Restas2: " + listaRestas);
         int posicion = listaRestas.indexOf(restaMejor);
         return posicion;
         
@@ -123,7 +124,51 @@ public class SCAN extends Algoritmo{
         
     }
         
+    
+  
+    public ArrayList<Integer> ejecutar2(List<Solicitud> listaSolicitudes2 ,int inicio,int total,int direccion,int cantidad){
         
+        
+        // ArrayList<Solicitud> listaSolicitudes = (ArrayList) listaSolicitudes2.clone();
+        
+        
+        ArrayList<Solicitud> listaSolicitudes = new ArrayList<>();
+        
+        for(Solicitud solicitud: listaSolicitudes2){
+            listaSolicitudes.add(solicitud);
+        }
+        
+       
+        ArrayList<Integer> result = new ArrayList<>();
+        ArrayList<Integer> tracks = new ArrayList<>();
+        int trackResultado = 0;
+        int posicionTrackResultado = 0;
+        
+        int size = listaSolicitudes.size();
+        
+        for(int i = 0 ; i < size; i++){
+            
+            
+            
+            int posicionSiguiente = this.masCercano(listaSolicitudes, inicio, direccion);
+            trackResultado = listaSolicitudes.get(posicionSiguiente).getPista();
+            //System.out.println("trackResultado: "  + trackResultado);
+            
+            listaSolicitudes.remove(posicionSiguiente);
+            result.add(trackResultado);
+            
+            
+        }
+        
+        
+        
+        
+        //super.agregarResultado(result);
+        return result;
+        
+    
+    
+}
     
     
     @Override

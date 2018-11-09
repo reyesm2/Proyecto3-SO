@@ -5,6 +5,7 @@
  */
 package Modelo.Algoritmos;
 
+import Controlador.Singleton;
 import Modelo.Requisiciones;
 import Modelo.Solicitud;
 import java.util.ArrayList;
@@ -21,72 +22,136 @@ public class NSCAN extends SCAN{
     }
     
     
-    
-    public ArrayList<Integer> SCAN(List<Solicitud> listaSolicitudes, int inicio,int total,int direccion,int cantidad){
+    public Integer masCercano(List<Solicitud> listaSolicitudes, int inicio, int direccion){
         
+       
         
-        ArrayList<Integer> result = new ArrayList<>();
-        int cabezaDisco = inicio;
-        Solicitud solicitudTemporal;
+        ArrayList<Integer> listaRestas = new ArrayList<>();
         
-       // System.out.println("Lista de Solicitudes: " + listaSolicitudes);
-        if(direccion == 1 ){
+        int resta = 0;
+        int trackTemporal;
+        int restaMejor = 1000;
+        
+        for(Solicitud solicitud: listaSolicitudes){
             
-            
-            while(cabezaDisco < listaSolicitudes.size()){
+            if(solicitud != null){
                 
-                solicitudTemporal = listaSolicitudes.get(cabezaDisco);
-                
-                if(solicitudTemporal != null){
-                    result.add(solicitudTemporal.getPista());
-                    listaSolicitudes.set(cabezaDisco, null);
-                }         
-                cabezaDisco++;
-                
-            }
-            
-            cabezaDisco = listaSolicitudes.size() -1;
-            while(cabezaDisco > -1 ){
-                
-                solicitudTemporal = listaSolicitudes.get(cabezaDisco);
-                
-                if(solicitudTemporal != null){
-                    result.add(solicitudTemporal.getPista());
-                    listaSolicitudes.set(cabezaDisco, null);
+                trackTemporal = solicitud.getPista();
+                resta = Math.abs(inicio - trackTemporal);          
+                listaRestas.add(resta);
+
+                if(direccion == 1 ){
+
+                    if (trackTemporal > inicio && resta < restaMejor){
+                        restaMejor = resta;
+                    }
                 }
-                cabezaDisco--;
+                else{
+
+                    if(trackTemporal < inicio && resta < restaMejor){
+                        restaMejor = resta;
+                    }
+                }
+                
             }
-    
+            
+            
+        }
+        
+        System.out.println("Lista de Restas1: " + listaRestas);
+        
+        if(restaMejor != 1000){
+            
+            System.out.println("Resta mejor: " + restaMejor);
+            
+            int posicion = listaRestas.indexOf(restaMejor);
+            System.out.println("Posicion de la mejor resta: " + posicion);
+            return posicion;
+            
         }
         else{
             
-            while(cabezaDisco > 0 ){
-                
-                solicitudTemporal = listaSolicitudes.get(cabezaDisco);
-                
-                if(solicitudTemporal != null){
-                    result.add(solicitudTemporal.getPista());
-                    listaSolicitudes.set(cabezaDisco, null);
-                }
-                cabezaDisco--;
+            if(direccion == 1){
+                direccion = 0;
+            }
+            else{
+                direccion = 1;
             }
             
-            cabezaDisco = 0;
+        
+        listaRestas.clear();
+        for(Solicitud solicitud: listaSolicitudes){
             
-            while(cabezaDisco < listaSolicitudes.size()){
+            
+            if(solicitud != null){
                 
-                solicitudTemporal = listaSolicitudes.get(cabezaDisco);
-                
-                if(solicitudTemporal != null){
-                    result.add(solicitudTemporal.getPista());
-                    listaSolicitudes.set(cabezaDisco,null);
+                trackTemporal = solicitud.getPista();
+                resta = Math.abs(inicio - trackTemporal);          
+                listaRestas.add(resta);
+
+                if(direccion == 1 ){
+
+                    if (trackTemporal > inicio && resta < restaMejor){
+                        restaMejor = resta;
+                    }
                 }
-                cabezaDisco++;
-            }   
+                else{
+
+                    if(trackTemporal < inicio && resta < restaMejor){
+                        restaMejor = resta;
+                    }
+                }
+            
+                
+            }
+            
+            
         }
         
         
+        System.out.println("Resta mejor: " + restaMejor);
+        System.out.println("Lista de Restas2: " + listaRestas);
+        int posicion = listaRestas.indexOf(restaMejor);
+        return posicion;
+        
+            
+            
+        }
+        
+        
+        
+    }
+    
+    public ArrayList<Integer> SCAN(List<Solicitud> listaSolicitudes, int inicio,int total,int direccion,int cantidad){
+        
+        ArrayList<Integer> result = new ArrayList<>();
+        ArrayList<Integer> tracks = new ArrayList<>();
+        int trackResultado = 0;
+        int posicionTrackResultado = 0;
+        
+        int size = listaSolicitudes.size();
+        
+        for(int i = 0 ; i < size; i++){
+            
+            
+            
+            int posicionSiguiente = this.masCercano(listaSolicitudes, inicio, direccion);
+            trackResultado = listaSolicitudes.get(posicionSiguiente).getPista();
+            System.out.println("trackResultado: "  + trackResultado);
+            
+            listaSolicitudes.remove(posicionSiguiente);
+            result.add(trackResultado);
+            
+            
+        }
+        
+        
+        
+        
         return result;
+        //uper.agregarResultado(result);
+        
+    
         
     }
     
@@ -127,9 +192,13 @@ public class NSCAN extends SCAN{
         
         ArrayList<Integer> result = new ArrayList<>();
         ArrayList<Integer> resultTemporal;
+        
+        SCAN scan = new SCAN("SCAN");
+        
         for(List subLista : listaGrupos){
             
-            resultTemporal = this.SCAN(subLista, inicio, total, direccion, cantidad);
+            //resultTemporal = this.SCAN(subLista, inicio, total, direccion, cantidad);
+            resultTemporal = scan.ejecutar2(subLista, inicio, total, direccion, cantidad);
             result.addAll(resultTemporal);
             
         }
