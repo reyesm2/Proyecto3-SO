@@ -19,73 +19,141 @@ public class SCAN extends Algoritmo{
     public SCAN(String nombre) {
         super(nombre);
     }
+    
+    
+    
+   
+    public Integer masCercano(ArrayList<Solicitud> listaSolicitudes, int inicio, int direccion){
+        
+       
+        
+        ArrayList<Integer> listaRestas = new ArrayList<>();
+        
+        int resta = 0;
+        int trackTemporal;
+        int restaMejor = 1000;
+        
+        for(Solicitud solicitud: listaSolicitudes){
+            
+            if(solicitud != null){
+                
+                trackTemporal = solicitud.getPista();
+                resta = Math.abs(inicio - trackTemporal);          
+                listaRestas.add(resta);
 
+                if(direccion == 1 ){
+
+                    if (trackTemporal > inicio && resta < restaMejor){
+                        restaMejor = resta;
+                    }
+                }
+                else{
+
+                    if(trackTemporal < inicio && resta < restaMejor){
+                        restaMejor = resta;
+                    }
+                }
+                
+            }
+            
+            
+        }
+        
+        System.out.println("Lista de Restas1: " + listaRestas);
+        
+        if(restaMejor != 1000){
+            
+            System.out.println("Resta mejor: " + restaMejor);
+            
+            int posicion = listaRestas.indexOf(restaMejor);
+            System.out.println("Posicion de la mejor resta: " + posicion);
+            return posicion;
+            
+        }
+        else{
+            
+            if(direccion == 1){
+                direccion = 0;
+            }
+            else{
+                direccion = 1;
+            }
+            
+        
+        listaRestas.clear();
+        for(Solicitud solicitud: listaSolicitudes){
+            
+            
+            if(solicitud != null){
+                
+                trackTemporal = solicitud.getPista();
+                resta = Math.abs(inicio - trackTemporal);          
+                listaRestas.add(resta);
+
+                if(direccion == 1 ){
+
+                    if (trackTemporal > inicio && resta < restaMejor){
+                        restaMejor = resta;
+                    }
+                }
+                else{
+
+                    if(trackTemporal < inicio && resta < restaMejor){
+                        restaMejor = resta;
+                    }
+                }
+            
+                
+            }
+            
+            
+        }
+        
+        
+        System.out.println("Resta mejor: " + restaMejor);
+        System.out.println("Lista de Restas2: " + listaRestas);
+        int posicion = listaRestas.indexOf(restaMejor);
+        return posicion;
+        
+            
+            
+        }
+        
+        
+        
+    }
+        
+        
+    
+    
     @Override
     public void ejecutar(Requisiciones requesicion,int inicio,int total,int direccion,int cantidad){
         
         
         ArrayList<Solicitud> listaSolicitudes = (ArrayList)requesicion.getListaSolicitudes().clone();
-        
-        
         ArrayList<Integer> result = new ArrayList<>();
-        int cabezaDisco = inicio;
-        Solicitud solicitudTemporal;
+        ArrayList<Integer> tracks = new ArrayList<>();
+        int trackResultado = 0;
+        int posicionTrackResultado = 0;
         
-        System.out.println("Lista de Solicitudes: " + listaSolicitudes);
-        if(direccion == 1 ){
+        int size = listaSolicitudes.size();
+        
+        for(int i = 0 ; i < size; i++){
             
             
-            while(cabezaDisco < listaSolicitudes.size()){
-                
-                solicitudTemporal = listaSolicitudes.get(cabezaDisco);
-                
-                if(solicitudTemporal != null){
-                    result.add(solicitudTemporal.getPista());
-                    listaSolicitudes.set(cabezaDisco, null);
-                }         
-                cabezaDisco++;
-                
-            }
             
-            cabezaDisco = listaSolicitudes.size() -1;
-            while(cabezaDisco > -1 ){
-                
-                solicitudTemporal = listaSolicitudes.get(cabezaDisco);
-                
-                if(solicitudTemporal != null){
-                    result.add(solicitudTemporal.getPista());
-                    listaSolicitudes.set(cabezaDisco, null);
-                }
-                cabezaDisco--;
-            }
-    
+            int posicionSiguiente = this.masCercano(listaSolicitudes, inicio, direccion);
+            trackResultado = listaSolicitudes.get(posicionSiguiente).getPista();
+            System.out.println("trackResultado: "  + trackResultado);
+            
+            listaSolicitudes.remove(posicionSiguiente);
+            result.add(trackResultado);
+            
+            
         }
-        else{
-            
-            while(cabezaDisco > 0 ){
-                
-                solicitudTemporal = listaSolicitudes.get(cabezaDisco);
-                
-                if(solicitudTemporal != null){
-                    result.add(solicitudTemporal.getPista());
-                    listaSolicitudes.set(cabezaDisco, null);
-                }
-                cabezaDisco--;
-            }
-            
-            cabezaDisco = 0;
-            
-            while(cabezaDisco < listaSolicitudes.size()){
-                
-                solicitudTemporal = listaSolicitudes.get(cabezaDisco);
-                
-                if(solicitudTemporal != null){
-                    result.add(solicitudTemporal.getPista());
-                    listaSolicitudes.set(cabezaDisco,null);
-                }
-                cabezaDisco++;
-            }   
-        }
+        
+        
+        
         
         super.agregarResultado(result);
         
