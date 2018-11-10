@@ -85,6 +85,7 @@ public class Menu extends javax.swing.JFrame {
         jTextArea_estadistica = new javax.swing.JTextArea();
         jButton2 = new javax.swing.JButton();
         jComboBox_requisiciones = new javax.swing.JComboBox<>();
+        jButton_ayuda = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jCheckBox11 = new javax.swing.JCheckBox();
         jCheckBox12 = new javax.swing.JCheckBox();
@@ -304,6 +305,13 @@ public class Menu extends javax.swing.JFrame {
 
         jComboBox_requisiciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jButton_ayuda.setText("Ayuda");
+        jButton_ayuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ayudaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -312,14 +320,16 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2)
-                            .addComponent(jButton_ejecutar))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton_ejecutar))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(jButton_ayuda)))
                         .addGap(19, 19, 19)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel3)
                                     .addComponent(jTextField_inicio)
@@ -333,6 +343,8 @@ public class Menu extends javax.swing.JFrame {
                                 .addComponent(jButton1)
                                 .addGap(84, 84, 84))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jButton2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton_verGrafico)
                                 .addGap(80, 80, 80))))
@@ -385,7 +397,9 @@ public class Menu extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton2)
+                            .addComponent(jButton_ayuda))
                         .addContainerGap())))
         );
 
@@ -760,6 +774,65 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
+    private void jButton_ayudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ayudaActionPerformed
+        // TODO add your handling code here:
+        String ayudaSensitiva = "";
+        
+        //Algoritmos
+        ayudaSensitiva+="ALGORITMOS:\n";
+        if(this.jCheckBox1.isSelected()){
+            ayudaSensitiva += "RSS: Algoritmo de scheduling que elige un proceso aleatoriamente y luego ejecuta"
+                    +"las referencias a pista del proceso, esto se ejecuta para cada proceso.\n";
+        }
+        if(this.jCheckBox2.isSelected()){
+            ayudaSensitiva+="PRI: Algoritmo de scheduling que se basa en la prioridad de los procesos para ordenar"
+                    +"cada una de las referencias a pista.\n";
+        }
+        if(this.jCheckBox3.isSelected()){
+            ayudaSensitiva+="FIFO: Algoritmo de scheduling que ordena las referencias a pista de acuerdo al orden "+
+                    "de creación de los procesos.\n";
+        }
+        if(this.jCheckBox4.isSelected()){
+            ayudaSensitiva+="LIFO: Algoritmo de scheduling que ordena las referencias a pista de acuerdo al orden"
+                    +" de creación pero basado en el mas reciente.\n";
+        }
+        if(this.jCheckBox5.isSelected()){
+            ayudaSensitiva+="FIFO: Algoritmo de scheduling que ordena las referencias a pista de acuerdo al orden"+
+                    " establecida en la requisiciones.\n";
+        }
+        if(this.jCheckBox6.isSelected()){
+            ayudaSensitiva+="SSTF: Algoritmo de scheduling que ordena las referencias a pista de acuerdo a la mas cercana"+
+                    " a la pista de inicio establecida o a la ultima que se ejecuto de esta manera para cada solicitud.\n";
+        }
+        if(this.jCheckBox7.isSelected()){
+            ayudaSensitiva+="SCAN: Algoritmo de scheduling que ordena las referencias a pista de acuerdo a la siguiente"+
+                    " solicitud más cercana respetando la dirección en forma de elavador:\n"
+                    +"\tIncremento: hacia arriaba el más cercano.\n"
+                    +"\tDecremento: hacia abajo el más cercano.\n";
+        }
+        if(this.jCheckBox8.isSelected()){
+            ayudaSensitiva+="C-SCAN: Algoritmo de scheduling que ordena las referencias a pista de acuerdo a la siguiente"+
+                    " solicitud más cercana respetando la dirección en forma de circular:\n"
+                    +"\tIncremento: hacia arriaba el más cercano.\n"
+                    +"\tDecremento: hacia abajo el más cercano.\n";
+        }
+        if(this.jCheckBox9.isSelected()){
+            ayudaSensitiva+="N-step-SCAN: Algoritmo de scheduling que ordena las referencias a pista de acuerdo a la siguiente"+
+                    " solicitud más cercana respetando la dirección pero que crea grupos de un tamaño N:\n"
+                    +"\tIncremento: hacia arriaba el más cercano.\n"
+                    +"\tDecremento: hacia abajo el más cercano.\n";
+        }
+        if(this.jCheckBox10.isSelected()){
+            ayudaSensitiva+="C-SCAN: Algoritmo de scheduling que ordena las referencias a pista de acuerdo a la siguiente"+
+                    " solicitud más cercana respetando la dirección en forma de circular:\n"
+                    +"\tIncremento: hacia arriaba el más cercano.\n"
+                    +"\tDecremento: hacia abajo el más cercano.\n"
+                    +"Pero adicionalmente cuenta con una segunda lista donde se encuentran los nuevos seleccionados.\n";
+        }
+        
+        mensajeDialog(ayudaSensitiva, "Ayuda Sensitiva.");
+    }//GEN-LAST:event_jButton_ayudaActionPerformed
+
     public void agregarAlgoritmos(){
         Algoritmo algoritmo = new RSS("RSS");
         Singleton.getInstance().getControlador().agregarAlgoritmo(algoritmo);
@@ -903,6 +976,7 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton_ayuda;
     private javax.swing.JButton jButton_cargaProcesos;
     private javax.swing.JButton jButton_cargarRequesiciones;
     private javax.swing.JButton jButton_comparar;
