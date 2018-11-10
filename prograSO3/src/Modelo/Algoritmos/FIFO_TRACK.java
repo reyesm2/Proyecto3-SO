@@ -26,6 +26,9 @@ public class FIFO_TRACK extends Algoritmo{
         
         for(Solicitud solicitud : requesicion.getListaSolicitudes()){
             result.add(solicitud.getPista());
+            if(result.size()==total){
+                break;
+            }
         }
         super.agregarResultado(result);
         

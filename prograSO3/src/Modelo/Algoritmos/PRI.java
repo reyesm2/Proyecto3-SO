@@ -31,6 +31,9 @@ public class PRI extends Algoritmo{
                 if(proc.equals(solicitud.getProceso())){
                     result.add(solicitud.getPista());
                 }
+                if(result.size()==total){
+                    break;
+                }
             }
         }
         super.agregarResultado(result);

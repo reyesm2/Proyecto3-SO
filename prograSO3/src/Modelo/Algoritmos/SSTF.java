@@ -31,18 +31,17 @@ public class SSTF extends Algoritmo{
         for(int i=0;i<requisicion.getListaSolicitudes().size();i++){
             
             ArrayList<Integer> diferencias = calcularDiferencias(listaSolicitud, inicio);
-            
-            System.out.println("Inicio: "+inicio);
-            System.out.println("Diferencias: "+diferencias.toString());
-            System.out.println(listaSolicitud.toString());
-            
+  
             int pos = posNumeroMenor(diferencias);
             
             Solicitud solicitud = listaSolicitud.remove(pos);
             
             result.add(solicitud.getPista());
             inicio = solicitud.getPista();
-
+            
+            if(result.size()==total){
+                break;
+            }
         }
         super.agregarResultado(result);
     }

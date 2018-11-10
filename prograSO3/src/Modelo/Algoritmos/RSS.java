@@ -35,6 +35,9 @@ public class RSS extends Algoritmo{
                 if(proc.getNombre().equals(solicitud.getProceso())){
                     result.add(solicitud.getPista());
                 }
+                if(result.size()==total){
+                    break;
+                }
             }
         }
         super.agregarResultado(result);

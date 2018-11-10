@@ -305,8 +305,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jComboBox_requisiciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jButton_ayuda.setText("Ayuda");
         jButton_ayuda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -815,6 +813,23 @@ public class Menu extends javax.swing.JFrame {
     private void jButton_ayudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ayudaActionPerformed
         // TODO add your handling code here:
         String ayudaSensitiva = "";
+        
+        //Descripción:
+        ayudaSensitiva+="DESCRIPCIÓN:"
+                +"El sistema debe contar con 2 partes fundamentales:\n"
+                + "+Carga de procesos.\n"
+                + "+Carga de requisiciones(Las cuales corresponden a filas).\n"
+                + "Luego de cargado estos datos se puede ejecutar corridas de algoritmos de Scheduling"
+                + "con una cierta configuración de datos.\n"
+                + "Los algoritmos son ejecutados con requisiciones que fueron cargadas generando un ordenamiento,"
+                + "el cual se puede visualizar de dos manera:\n"
+                + "Individual: Se presenta una grafica que representa el recorrido del algortimo, ademas de estadisticas"
+                + "individuales.\n"
+                + "Comparativo: Se presenta una grafica con los diferentes algoritmos y todas sus estadisticas.\n"
+                + "Por ultimo, se puede visualizar los resultados por:\n"
+                + "-Ejecución completa.\n"
+                + "-Ejecución por partes.\n\n";
+        
         
         //Algoritmos
         ayudaSensitiva+="ALGORITMOS:\n";
