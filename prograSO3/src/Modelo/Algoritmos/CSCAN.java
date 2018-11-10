@@ -138,6 +138,10 @@ public class CSCAN extends SCAN{
         int posicionTrackResultado = 0;
         
         int size = listaSolicitudes.size();
+        if(size > total){
+            size = total;
+        }
+        
         
         for(int i = 0 ; i < size; i++){
             
