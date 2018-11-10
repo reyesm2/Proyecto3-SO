@@ -5,6 +5,7 @@
  */
 package Modelo.Algoritmos;
 
+import Controlador.Singleton;
 import Modelo.Algoritmo;
 import Modelo.Requisiciones;
 import Modelo.Solicitud;
@@ -181,7 +182,14 @@ public class SCAN extends Algoritmo{
         int trackResultado = 0;
         int posicionTrackResultado = 0;
         
+        
+        
         int size = listaSolicitudes.size();
+        
+        if(size > total){
+            size = total;
+        }
+
         
         for(int i = 0 ; i < size; i++){
             
