@@ -26,13 +26,14 @@ public class GraficoComparativo extends javax.swing.JFrame {
      * Creates new form GraficoComparativo
      * @param select
      * @param algoritmos
+     * @param tipo
      */
-    public GraficoComparativo(ArrayList<Integer> select,ArrayList<Algoritmo> algoritmos) {
+    public GraficoComparativo(ArrayList<Integer> select,ArrayList<Algoritmo> algoritmos,int tipo) {
         setTitle("Grafico");
         setSize(800,600);
         setLocationRelativeTo(null);
         setVisible(true);
-        pintarGrafico(select,algoritmos);
+        pintarGrafico(select,algoritmos,tipo);
     }
 
     /**
@@ -61,33 +62,65 @@ public class GraficoComparativo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
-    private void pintarGrafico(ArrayList<Integer> select,ArrayList<Algoritmo> algoritmos) {
+    private void pintarGrafico(ArrayList<Integer> select,ArrayList<Algoritmo> algoritmos,int tipo) {
         
-        
-        panel = new JPanel();
-        getContentPane().add(panel);
-        // Fuente de Datos
-        DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
-        
-        
-        for(Integer i : select){
-            int cont=0;
-            for(ArrayList<Integer> dato : algoritmos.get(i).getResultados()){
-                for(Integer valor : dato){
-                    line_chart_dataset.addValue(valor, algoritmos.get(i).getNombre(), String.valueOf(cont));
-                    cont++;
+        if(tipo==0){
+            panel = new JPanel();
+            getContentPane().add(panel);
+            // Fuente de Datos
+            DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
+
+
+            for(Integer i : select){
+                int cont=0;
+                for(ArrayList<Integer> dato : algoritmos.get(i).getResultados()){
+                    for(Integer valor : dato){
+                        line_chart_dataset.addValue(valor, algoritmos.get(i).getNombre(), String.valueOf(cont));
+                        cont++;
+                    }
                 }
+
             }
-            
+            // Creando el Grafico
+            JFreeChart chart=ChartFactory.createLineChart("Resultado",
+                    "Tiempo","Numeros pistas",line_chart_dataset,PlotOrientation.VERTICAL,
+                    true,true,false);  
+
+            // Mostrar Grafico
+            ChartPanel chartPanel = new ChartPanel(chart);
+            panel.add(chartPanel);
+        }else{
+            panel = new JPanel();
+            getContentPane().add(panel);
+            // Fuente de Datos
+            DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
+
+
+            for(Integer i : select){
+                int cont=0;
+                int uno=1;
+                for(ArrayList<Integer> dato : algoritmos.get(i).getResultados()){
+                    for(Integer valor : dato){
+                        line_chart_dataset.addValue(valor, algoritmos.get(i).getNombre()+":"+String.valueOf(uno)
+                                , String.valueOf(cont));
+                        cont++;
+                    }
+                    cont=0;
+                    uno++;
+                }
+                
+
+            }
+            // Creando el Grafico
+            JFreeChart chart=ChartFactory.createLineChart("Resultado",
+                    "Tiempo","Numeros pistas",line_chart_dataset,PlotOrientation.VERTICAL,
+                    true,true,false);  
+
+            // Mostrar Grafico
+            ChartPanel chartPanel = new ChartPanel(chart);
+            panel.add(chartPanel);
         }
-        // Creando el Grafico
-        JFreeChart chart=ChartFactory.createLineChart("Resultado",
-                "Tiempo","Numeros pistas",line_chart_dataset,PlotOrientation.VERTICAL,
-                true,true,false);  
         
-        // Mostrar Grafico
-        ChartPanel chartPanel = new ChartPanel(chart);
-        panel.add(chartPanel);
 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

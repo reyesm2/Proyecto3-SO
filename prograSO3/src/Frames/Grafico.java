@@ -29,13 +29,14 @@ public class Grafico extends javax.swing.JFrame {
      * Creates new form Grafico
      * @param nombre
      * @param datos
+     * @param tipo
      */
-    public Grafico(String nombre,ArrayList<ArrayList<Integer>> datos) {
+    public Grafico(String nombre,ArrayList<ArrayList<Integer>> datos,int tipo) {
         setTitle("Grafico");
         setSize(800,600);
         setLocationRelativeTo(null);
         setVisible(true);
-        pintarGrafico(nombre,datos);
+        pintarGrafico(nombre,datos,tipo);
         //initComponents();
     }
 
@@ -64,29 +65,55 @@ public class Grafico extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void pintarGrafico(String nombre,ArrayList<ArrayList<Integer>> datos) {
+    private void pintarGrafico(String nombre,ArrayList<ArrayList<Integer>> datos, int tipo) {
         
+        if(tipo==0){
+            panel = new JPanel();
+            getContentPane().add(panel);
+            // Fuente de Datos
+            DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
+            int cont=0;
+            for (ArrayList<Integer> dato : datos) {
+                for(Integer valor : dato){
+                    line_chart_dataset.addValue(valor, nombre, String.valueOf(cont));
+                    cont++;
+                }
+            }   
+
+            // Creando el Grafico
+            JFreeChart chart=ChartFactory.createLineChart("Resultado",
+                    "Tiempo","Numeros pistas",line_chart_dataset,PlotOrientation.VERTICAL,
+                    true,true,false);  
+
+            // Mostrar Grafico
+            ChartPanel chartPanel = new ChartPanel(chart);
+            panel.add(chartPanel);
+        }else{
+            panel = new JPanel();
+            getContentPane().add(panel);
+            // Fuente de Datos
+            DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
+            int cont=0;
+            int uno=1;
+            for (ArrayList<Integer> dato : datos) {
+                for(Integer valor : dato){
+                    line_chart_dataset.addValue(valor, nombre+": "+String.valueOf(uno), String.valueOf(cont));
+                    cont++;
+                }
+                cont=0;
+                uno++;
+            }   
+
+            // Creando el Grafico
+            JFreeChart chart=ChartFactory.createLineChart("Resultado",
+                    "Tiempo","Numeros pistas",line_chart_dataset,PlotOrientation.VERTICAL,
+                    true,true,false);  
+
+            // Mostrar Grafico
+            ChartPanel chartPanel = new ChartPanel(chart);
+            panel.add(chartPanel);
+        }
         
-        panel = new JPanel();
-        getContentPane().add(panel);
-        // Fuente de Datos
-        DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
-        int cont=0;
-        for (ArrayList<Integer> dato : datos) {
-            for(Integer valor : dato){
-                line_chart_dataset.addValue(valor, nombre, String.valueOf(cont));
-                cont++;
-            }
-        }   
- 
-        // Creando el Grafico
-        JFreeChart chart=ChartFactory.createLineChart("Resultado",
-                "Tiempo","Numeros pistas",line_chart_dataset,PlotOrientation.VERTICAL,
-                true,true,false);  
-        
-        // Mostrar Grafico
-        ChartPanel chartPanel = new ChartPanel(chart);
-        panel.add(chartPanel);
 
     }
     

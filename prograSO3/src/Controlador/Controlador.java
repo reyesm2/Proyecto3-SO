@@ -325,6 +325,34 @@ public class Controlador {
         result+="Promedio:\t\t"+String.valueOf(promedio)+"\n";
         return result;
     }
+    
+    /**
+     * Metodo que escribe las estadisticas
+     * @param algoritmo
+     * @return 
+     */
+    public String verEstadisticaAlgoritmoUno(Algoritmo algoritmo){
+        ArrayList<ArrayList<Integer>> resultados = algoritmo.getResultados();
+        ArrayList<Integer> valores = calcularEstadisticaAlgoritmo(algoritmo);
+        String result = algoritmo.getNombre()+"\n"+
+                "Siguiente\t\tNúmero\n";
+        int cont=0;
+        
+        for(ArrayList<Integer> resultado : resultados){
+            result+="----------------------------------------------------------\n";
+            ArrayList<Integer> valoresUno = new ArrayList<>();
+            for(Integer valor : resultado){
+                result+=String.valueOf(valor)+"\t\t "+String.valueOf(valores.get(cont))+"\n";
+                valoresUno.add(valores.get(cont));
+                cont++;                
+            }
+            float promedio = promedioEstadistica(valoresUno);
+            result+="Promedio:\t\t"+String.valueOf(promedio)+"\n";
+        }
+        
+        return result;
+    }
+    
     /**
      * Permite ver las estadisticas de los algoritmos selecionados
      * @return 
@@ -339,6 +367,19 @@ public class Controlador {
         return result;
     }
     /**
+     * Permite ver las estadisticas de los algoritmos selecionados
+     * @return 
+     */
+    public String verEstadisticasUno(){
+        String result="";
+        for(Algoritmo algoritmo : this.gestorAlgoritmos){
+            if(algoritmo.isActivado()&& algoritmo.getResultados().size()>0){
+                result += verEstadisticaAlgoritmoUno(algoritmo);
+            }
+        }
+        return result;
+    }
+    /**
      * Permite ver las estadistica de los selecionados
      * @param select
      * @return 
@@ -347,6 +388,19 @@ public class Controlador {
         String result = "";
         for(Integer valor : select){
             result += verEstadisticaAlgoritmo(this.gestorAlgoritmos.get(valor));
+        }
+        return result;
+    }
+
+    /**
+     * Permite ver las estadistica de los selecionados
+     * @param select
+     * @return 
+     */
+    public String verComparacionesAlgoritmoUno(ArrayList<Integer> select){
+        String result = "";
+        for(Integer valor : select){
+            result += verEstadisticaAlgoritmoUno(this.gestorAlgoritmos.get(valor));
         }
         return result;
     }
